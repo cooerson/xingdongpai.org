@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<title>极简形而上</title>
+
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+	<meta name="description" content="利好-->感觉舒服-->选择创造人生——利好-->感觉舒服-->选择创造人生——利好-->感觉舒服-->选择创造人生">
+	<meta name="description" content="感觉舒服是当下的结果，选择是当下意志的表达，趋利性是自然的绝对逻辑">
+	<meta name="description" content="凤直，蛇圆；凤向前，蛇向后；凤创造，蛇得到；蛇凤分开，蛇凤合一">
+	<meta name="keywords" content="感觉, 感受, 感知, 选择, 决定, 意志, 意愿, 结果, 当下, 趋利性, 草履虫">
+	<meta name="author" content="大鸟真气上帝仙道神质朴的自然神论 2008-2025">
+
+	<meta name="desc" content="代码质量按照最高标准:【0内存 && 超快访问速度 && 代码可读性】">
+	<!-- 代码可读性：认知差异的解决标准-->
+	<!-- chromium env -->
+
+	<style>
+		/**
+			A Fastest Loading Website
+		 	use a linear .css and .js 
+		*/
+		/**
+		  isPhone == (hover == none && pointer == coarse) 
+		  //hover has 2 const: none/hover 
+		  https://developer.mozilla.org/en-US/docs/Web/CSS/@media/hover#hover 
+		  //pointer has 3 const: none/fine/coarse 
+		  https://developer.mozilla.org/en-US/docs/Web/CSS/@media/pointer 
+		 */
+		@media (hover: hover), (pointer: none), (pointer: fine) {
+			/*img.img_cache { src:"https://act.xingdongpai.com/simple-abs-science.svg" }*/
+			img.img_cache { src:"simple-abs-science.svg" }
+
+			.svg-url {
+				width: 100%;
+				background-repeat: no-repeat;
+				background-position-x: center;
+
+				/*background-image: url("https://act.xingdongpai.com/simple-abs-science.svg");*/
+				background-image: url("simple-abs-science.svg");
+				/* coomark MARK-height */
+				/* 'hidden' does not automatically start to render on-screen */
+				content-visibility: hidden; 
+  				contain-intrinsic-height: 1083px; /* A guess at the height of it */
+			}
+		}
+
+		@media (hover: none) and (pointer: coarse) {
+			/*img.img_cache { src:"https://act.xingdongpai.com/phone-750w.svg" }*/
+			img.img_cache { src:"phone-750w.svg" }
+
+			.svg-url{
+				width: 100%;
+				background-repeat: no-repeat;
+				background-position-x: center;
+
+				/*background-image: url("https://act.xingdongpai.com/phone-750w.svg");*/
+				background-image: url("phone-750w.svg");
+				
+				/* coomark MARK-height */
+				/* 'hidden' does not automatically start to render on-screen */
+				content-visibility: hidden; 
+  				contain-intrinsic-height: 1780px; /* A guess at the height of it */
+			}
+		}
+
+		body {
+			background-color: hsl(0 100% 99%);
+			margin: 0;
+		}
+
+		.center-initSizeYES {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			margin: auto;
+		}
+
+		.center-initSizeNO {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+		}
+
+		.heartbeat {
+			width: 1em;
+			height: 1em;
+			font-size: 56px;/*偶数使其居中*/
+		}
+
+		/* ------------ refresh button coomark ------------- */
+		/* https://uiverse.io/mrhyddenn/cuddly-zebra-68 */
+		.refresh {
+			border: none;
+			border-radius: 7px;
+			padding: 4px 12px;
+			/* 65/97=0.670 */
+			background: linear-gradient(hsl(207deg 97% 65%),hsl(215deg 100% 50%));
+			color: #ffffff;
+			font-size: 16px;
+			font-weight: bold;
+			font-family: Arial Black, "Helvetica Neue";
+			user-select: none;
+  			-webkit-user-select: none;
+  			touch-action: manipulation;
+		}
+		
+		.refresh:active {
+			background: linear-gradient(hsl(205deg 97% 63%),hsl(215deg 100% 50%));
+			box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);			
+		}
+	</style>
+	<script>
+		getRandomNum = (min, max) => {
+			min = Math.ceil(min);
+			max = Math.floor(max);
+			randomNum = Math.floor(Math.random() * (max - min) + min);
+			return randomNum;
+		}
+		(mainjs = () => {
+			const DEBUG = false;
+			const IS_MOBILE = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+			const IS_FASTEST_MODE = true;
+			let MUST_SHOW_LOADING = IS_FASTEST_MODE?false:true;
+			let HAS_IMG_CACHE = null; //bool null, true, false. coomark
+			
+			LOG_DEBUG = (str) => {
+				if (DEBUG == true) {
+					console.log(str)
+				}
+			}
+
+			const View_ENUM = { Main:"main_view", Loading:"loading_view", Refresh:"refresh_view" };
+
+			let IS_OFFLINE = null;//bool
+			//init MARK-dom-a0
+			let IS_LINEAR_DOM = true;//bool
+			let IS_ASYNC_URL = false;//bool
+			let IS_DOM4_MARK = null;//bool
+			let IS_DOM5_MARK = null;//bool
+
+			reInitMark = () => {
+				IS_OFFLINE = null;
+				//init MARK-dom-a0
+				IS_LINEAR_DOM = true;
+				IS_ASYNC_URL = false;
+				IS_DOM4_MARK = null;
+				IS_DOM5_MARK = null;
+			}
+			reload = () => {
+				reInitMark();
+				location.assign(window.location);
+			}			
+
+			var loadingTime = MUST_SHOW_LOADING?getRandomNum(300*2,300*6):0;
+			var newHeight;
+
+			//@mark View_ENUM
+			showView = (mark) => {
+				//show main
+				if (mark == View_ENUM.Main && document.getElementById("main").style.display != "block") {
+					document.getElementById("main").style.display = "block";
+					document.getElementById("refresh").style.display = "none";
+					document.getElementById("loading").style.display = "none";
+				}
+				//show refresh button
+				if (mark == View_ENUM.Refresh && document.getElementById("refresh").style.display != "block") {
+					document.getElementById("main").style.display = "none";
+					document.getElementById("refresh").style.display = "block";
+					document.getElementById("loading").style.display = "none";
+				}
+				//show loading..
+				if (mark == View_ENUM.Loading && document.getElementById("loading").style.display != "block") {
+					// if (HAS_IMG_CACHE == null || HAS_IMG_CACHE == true) {
+						document.getElementById("main").style.display = "none";
+						document.getElementById("refresh").style.display = "none";
+						document.getElementById("loading").style.display = "block";
+					// }
+				}
+			}
+			//@mark View_ENUM
+			hideView = (mark) => {
+				//hide main
+				if (mark == View_ENUM.Main && document.getElementById("main").style.display != "none") {
+					document.getElementById("main").style.display = "none";
+				}
+				//hide refresh button
+				if (mark == View_ENUM.Refresh && document.getElementById("refresh").style.display != "none") {
+					document.getElementById("refresh").style.display = "none";
+				}
+				//hide loading..
+				if (mark == View_ENUM.Loading && document.getElementById("loading").style.display != "none") {
+					document.getElementById("loading").style.display = "none";
+				}
+			}
+			
+			//readystatechange as event listener to insert or modify the DOM before DOMContentLoaded
+			//autorelease 	document.onreadystatechange = domReadyState;
+			//release	 	document.addEventListener("readystatechange", domReadyState)
+			//				document.removeEventListener("readystatechange", domReadyState)
+			domReadyState = (event) => {
+				if (document.readyState == "interactive") {
+					//coomark MARK-dom-a2
+					//  browser is handing linear logic(DOM=html+css), can access DOM now
+					//	browser is handing async logic(such as herf=,url(),src=,render), can do async stuff now too
+					LOG_DEBUG(" -----------coomark MARK-dom-a2 -----------")
+					
+					IS_ASYNC_URL = true;
+
+
+					//=================coomarkcoomark=================
+					imgElement = document.querySelector("#img_cache");
+
+					//show loading
+					if (IS_FASTEST_MODE == true && HAS_IMG_CACHE == null) {
+						MUST_SHOW_LOADING = true;
+						loadingTime = 300*6;
+					}
+					
+					//imgElement.true(img result =100%) 
+					LOG_DEBUG("imgElement.complete:"+imgElement.complete);
+					if (imgElement.complete == true) {
+						MUST_SHOW_LOADING = false;
+						HAS_IMG_CACHE = true;
+						loadingTime = 0;
+					}
+
+					if (HAS_IMG_CACHE != true) {
+						browserImgComplete = imgElement.complete;
+						if (browserImgComplete != null && browserImgComplete != undefined) {
+							MUST_SHOW_LOADING = false;
+							HAS_IMG_CACHE = true;
+							loadingTime = 0;
+						}
+					}
+					
+
+					showView(View_ENUM.Loading);
+					//=================coomarkcoomark=================
+
+
+
+
+					document.getElementById("main").setAttribute('class', 'svg-url');
+
+					if (IS_MOBILE == true) {
+						//real ratio: 750/1780=0.42134831460 coomark：长宽比为整数时能完全像素对齐
+						newHeight = document.documentElement.clientWidth/0.42134831460 + "px";
+
+						//coomark MARK-height
+						//update 'contain-intrinsic-height', then start to render on-screen async
+						document.getElementById("main").setAttribute('style', 'contain-intrinsic-height: '+ newHeight + ";");
+						//some unsupported browsers
+						document.getElementById("main").setAttribute('style', 'height:'+ newHeight + ";");
+						
+						LOG_DEBUG(newHeight);
+				    } else {
+				    	//coomark MARK-height
+						//update 'contain-intrinsic-height', then start to render on-screen async
+						document.getElementById("main").setAttribute('style', 'contain-intrinsic-height: 1083px;');
+						//some unsupported browsers
+						document.getElementById("main").setAttribute('style', 'height: 1083px;');
+						LOG_DEBUG("1083px");
+				    }
+
+				} else if (document.readyState == 'complete'){
+					//coomark MARK-dom-a4
+					//	Async-url fail || The page is fully loaded
+					//	((linear logic done) && (async logic done)) || ((linear logic done) && (async logic failed))
+					LOG_DEBUG(" -----------coomark MARK-dom-a4 ----------- ")
+					LOG_DEBUG("The page is fully loaded || async-url failed")
+
+					IS_ASYNC_URL = false;
+
+					LOG_DEBUG("IS_OFFLINE:"+IS_OFFLINE)
+					LOG_DEBUG("IS_LINEAR_DOM:"+IS_LINEAR_DOM)
+					LOG_DEBUG("IS_ASYNC_URL:"+IS_ASYNC_URL)
+					LOG_DEBUG("IS_DOM4_MARK:"+IS_DOM4_MARK)
+					
+					// async loading then disconnected, about to fire MARK-dom-a5
+					if (IS_OFFLINE == true) {
+						LOG_DEBUG(" async loading then disconnected ")
+
+						showView(View_ENUM.Refresh);
+
+						IS_DOM4_MARK = true;
+					}else{
+						LOG_DEBUG(" -----------coomark MARK-dom-a4 ----------- ")
+						LOG_DEBUG("The page is fully loaded || async-url failed")
+					}
+				}
+			}
+
+			//coomark MARK-dom-a1
+			//	browser is handing linear logic(DOM=html+css)
+			if (document.readyState == "loading") {
+				LOG_DEBUG(" -----------coomark MARK-dom-a1 -----------")
+
+				document.onreadystatechange = domReadyState;
+
+				//coomark MARK-dom-a3
+				//	linear logic done(DOM=html+css)
+				//  do NOT use removeEventListener("DOMContentLoaded", ()=>{})
+				document.addEventListener("DOMContentLoaded", (event) => {
+					LOG_DEBUG(" -----------coomark MARK-dom-a3 -----------")
+					LOG_DEBUG("linear logic done");
+					IS_LINEAR_DOM = false;
+					if (MUST_SHOW_LOADING == true || (IS_FASTEST_MODE == true && HAS_IMG_CACHE == null)) {
+						hideView(View_ENUM.Main);
+					} else {
+						//DOM Content fully loaded and parsed
+						showView(View_ENUM.Main);
+					}
+				})
+
+				//	(linear logic done) && (async logic done)
+				//	Whole page has loaded(window.onload)
+				window.onload = (event) => {
+					LOG_DEBUG(" -----------coomark MARK-dom-a5 -----------")
+					LOG_DEBUG("Whole page has loaded");
+					IS_DOM5_MARK = true;
+
+					// async loading then disconnected
+					if (IS_DOM4_MARK == true) {
+						LOG_DEBUG(" -----------async loading then disconnected-----------")
+						showView(View_ENUM.Refresh);
+					} else {
+						LOG_DEBUG("--------coomark the end of MARK-dom --------")
+	
+						// setTimeout-coomark IIFE
+						let timeout;
+						juhua = new Promise((done,fail) => {
+							juhuaID = (time) => {
+							    return window.setTimeout(() => {
+							    	LOG_DEBUG("promrise.done()");
+							    	done("set args here");
+							    }, time);
+							}
+							timeout = juhuaID(Number(loadingTime))
+						})
+						juhua.then((param) => {
+							LOG_DEBUG("promrise.then()");
+							LOG_DEBUG("param:" + param);
+
+							//cancle it
+							window.clearTimeout(timeout);
+
+							//Whole page has loaded	
+							showView(View_ENUM.Main);
+													
+							//end of MARK-dom
+							IS_LINEAR_DOM = false;
+							IS_ASYNC_URL = false;
+							IS_DOM4_MARK = false;
+						});
+					}
+				}
+
+				window.onpageshow = (event) => {
+					// LOG_DEBUG("~~~~~~~~~~~~event.persisted~~~~~~~~~~~~~");
+				    if (event.persisted) {
+				        LOG_DEBUG("~~~~~~~~~~~~event.persisted~~~~~~~~~~~~~");
+				    }
+				};
+
+
+				screen.orientation.onchange = (event) => {
+					const type = event.target.type;
+				  	const angle = event.target.angle;
+				  	LOG_DEBUG(`ScreenOrientation change: ${type}, ${angle} degrees.`);
+				  	if (type == "portrait-primary" || type == "landscape-primary" || type == "landscape-secondary" || type == "portrait-secondary") {
+				  		reload();
+				  	}
+				}
+
+				window.onoffline = (event) => {
+					LOG_DEBUG(" -----------onoffline -----------")
+
+					IS_OFFLINE = true;
+					LOG_DEBUG("timeout:" + timeout);
+				}
+
+				window.ononline = (event) => {
+					LOG_DEBUG(" -----------ononline -----------")
+
+					IS_OFFLINE = false;
+				}
+				
+				window.onerror = (event) => {
+					LOG_DEBUG(" -----------error-----------")
+					
+					event.stopImmediatePropagation();
+					event.preventDefault();
+					LOG_DEBUG(event + " event.type:" + event.type + " event.message:" + event.message);
+				}
+
+			}
+
+			refresh = (event) => {
+				LOG_DEBUG("-----------onClick-----------")
+				LOG_DEBUG("IS_OFFLINE:"+IS_OFFLINE)
+				LOG_DEBUG("IS_LINEAR_DOM:"+IS_LINEAR_DOM)
+				LOG_DEBUG("IS_ASYNC_URL:"+IS_ASYNC_URL)
+				LOG_DEBUG("IS_DOM4_MARK:"+IS_DOM4_MARK)
+
+				if (IS_OFFLINE == true) {
+					return;
+				}
+
+				// async loading then disconnected
+				if ((IS_ASYNC_URL == false && IS_LINEAR_DOM == false) && IS_DOM4_MARK == true) {
+					showView(View_ENUM.Loading);
+					reload();
+					return;
+				}
+
+				// async loading then canceled request, still online
+				if ((IS_ASYNC_URL == false && IS_LINEAR_DOM == false) && IS_DOM4_MARK == false) {
+					showView(View_ENUM.Loading);
+					reload();
+					return;
+				}
+			}
+		})("IIFE");
+	</script>
+</head>	
+
+<body>
+	<a id="refresh" class="refresh center-initSizeNO" style="display:none;" onClick="refresh()"> BOND MAKRER </a>
+	<div id="loading" class="heartbeat center-initSizeYES" style="display:none;">
+		<svg id="heartbeat-333-84-52" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
+			<style><![CDATA[
+			#heartbeat-333-84-52-s-path1_ts {animation: heartbeat-333-84-52-s-path1_ts__ts 300ms linear infinite normal forwards}@keyframes heartbeat-333-84-52-s-path1_ts__ts { 0% {transform: translate(50px,49.999986px) scale(0.87496,0.874971);animation-timing-function: cubic-bezier(0.575,-0.365,0.575,1.4)} 100% {transform: translate(50px,49.999986px) scale(1.051203,1.051227)}}
+			]]></style>
+			<g id="heartbeat-333-84-52-s-path1_ts" transform="translate(50,49.999986) scale(0.87496,0.874971)"><path id="heartbeat-333-84-52-s-path1" d="M90,34.613c-.000037-1.470926-.151163-2.937958-.451-4.378-2.021-9.724-10.635-17.032-20.959-17.032-4.43,0-8.545,1.346-11.96,3.65-2.730136,1.848811-4.998584,4.30065-6.63,7.166-1.631416-2.86535-3.899864-5.317189-6.63-7.166-3.531997-2.385228-7.698044-3.656638-11.96-3.65-10.324,0-18.938,7.308-20.959,17.032-.299837,1.440042-.450963,2.907074-.451,4.378c0,.328.022.651.037.975-.002.159-.012.315-.012.474C10.025,58.179,50,86.797,50,86.797s39.975-28.618,39.975-50.734c0-.159-.01-.316-.012-.474.015-.325.037-.648.037-.976Z" transform="translate(-50,-49.999986)" fill="#ed1e7b"/></g>
+		</svg>
+	</div>
+	
+	<div id="main" style="display:none;"></div>
+	
+	<!-- <img> as a cache use http://xxx.svg--> 
+	<img id="img_cache" style="display:none;">
+</body>
+
+</html>
